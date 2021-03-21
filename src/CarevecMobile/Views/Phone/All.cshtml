@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Phone>
+
+
+<section class="row">
+
+    @foreach (var phone in this.Model)
+    {
+        <article class="col-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@phone.ImageUrl" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@phone.Brand @phone.Model</h5>
+                    <p class="card-text">@phone.Description</p>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span>Year: @phone.Year.ToString("dd/MM/yyyy")</span>
+                        <span>Price: @phone.Price</span>
+                    </div>
+                    <div>
+                        @if (this.User.IsInRole(GlobalConstants.AdminRole))
+                        {
+                            <a asp-area="@GlobalConstants.AdminArea" asp-controller="Phone" asp-action="Edit" asp-route-id="@phone.Id" class="btn btn-warning">Edit</a>
+                            <a asp-area="@GlobalConstants.AdminArea" asp-controller="Phone" asp-action="Delete" asp-route-id="@phone.Id" class="btn btn-danger">Delete</a>
+                        }
+                        else if (this.User.IsInRole(GlobalConstants.UserRole))
+                        {
+                            <a asp-area="@GlobalConstants.UserArea" asp-controller="User" asp-action="Buy" asp-route-phoneId="@phone.Id" class="btn btn-success">Buy</a>
+                        }
+                        <a asp-area="" asp-controller="Phone" asp-action="Details" asp-route-id="@phone.Id" class="btn btn-secondary">Details</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </article>
+    }
+
+</section>
+

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Phone>
+
+
+<section class="row">
+
+    @foreach (var phone in this.Model)
+    {
+        <article class="col-4" style="background-color: burlywood;">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@phone.ImageUrl" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@phone.Brand @phone.Model</h5>
+                    <p class="card-text">@phone.Description</p>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span>Year: @phone.Year.ToString("dd/MM/yyyy")</span>
+                        <span>Price: @phone.Price</span>
+                    </div>
+                    <div>
+                        <a asp-area="" asp-controller="Phone" asp-action="Details" asp-route-id="@phone.Id" class="btn btn-secondary">Details</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    }
+
+</section>
+
